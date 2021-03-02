@@ -13,7 +13,7 @@ engine = pyttsx3.init()
 engine.setProperty('volume', 1.0)
 
 # Trigger word in Listen Function
-WAKE = "Echo"
+WAKE = "Alexa"
 
 # Used to store user command for analysis
 CONVERSATION_LOG = "Conversation Log.txt"
@@ -21,7 +21,7 @@ CONVERSATION_LOG = "Conversation Log.txt"
 # Initial analysis of words to typically require a Google search
 KEY_WORDS = {"who": "who", "what": "what", "when": "when", "where": "where", "why": "why", "how": "how"}
 
-class Echo: 
+class Alexa: 
     def __init__(self):
         # Initialization phase
         self.recognizer = sr.Recognizer()
@@ -36,7 +36,7 @@ class Echo:
                 recognizer.dynamic_energy_threshold = 3000
                 audio = recognizer.listen(source, timeout=5.0)
                 command = recognizer.recognize_google(audio)
-                e.remember(command)
+                a.remember(command)
                 return command.lower()
         except sr.WaitTimeoutError:
             pass
@@ -72,25 +72,25 @@ class Echo:
         try:
             # If the command starts with a key word => do a Google search
             if self.find_key_words(command):
-                e.speak("Here is what I found.")
+                a.speak("Here is what I found.")
                 webbrowser.open("http://www.google.com/search?q={}".format(command))
             # Different open commands
             elif command == "open youtube":
-                e.speak("Opening Youtube.")
+                a.speak("Opening Youtube.")
                 webbrowser.open("https://www.youtube.com/feed/subscriptions")
             elif command == "open gmail":
-                e.speak("Opening your Gmail.")
+                a.speak("Opening your Gmail.")
                 webbrowser.open("https://mail.google.com/mail/u/0/?hl=fr#inbox")
             elif command == "open twitter":
-                e.speak("Opening Twitter")
+                a.speak("Opening Twitter")
                 webbrowser.open("https://twitter.com/")
             elif command == "open my documents":
-                e.speak("Opening your Documents folder.")
+                a.speak("Opening your Documents folder.")
                 os.startfile("C:/Users/Julie/Documents")
             elif command == "introduce yourself":
-                e.speak('I am Echo. I am a digital assistant. How may I help you ?')
+                a.speak('I am Alexa. I am a digital assistant. How may I help you ?')
             else:
-                e.speak("I don't know how to do that yet.")
+                a.speak("I don't know how to do that yet.")
         except TypeError:
             pass
         
@@ -105,7 +105,7 @@ class Echo:
                     audio = recognizer.listen(source, timeout=5.0)
                     response = recognizer.recognize_google(audio)
                     if response == WAKE:
-                        e.speak("How may I help you ?")
+                        a.speak("How may I help you ?")
                         return response.lower()
                     else:
                         pass
@@ -116,9 +116,9 @@ class Echo:
             except sr.RequestError:
                 print("Network error.")           
             
-e = Echo()
-e.start_conversation_log()
+a = Alexa()
+a.start_conversation_log()
 while True:
-    response = e.listen(recognizer, microphone)
-    command = e.hear(recognizer, microphone, response)
-    e.analyze(command)  
+    response = a.listen(recognizer, microphone)
+    command = a.hear(recognizer, microphone, response)
+    a.analyze(command)  
