@@ -78,6 +78,9 @@ class Alexa:
             elif command == "open youtube":
                 a.speak("Opening Youtube.")
                 webbrowser.open("https://www.youtube.com/feed/subscriptions")
+            elif command == "open google":
+                a.speak("Opening Google.")
+                webbrowser.open("https://www.google.fr/")
             elif command == "open gmail":
                 a.speak("Opening your Gmail.")
                 webbrowser.open("https://mail.google.com/mail/u/0/?hl=fr#inbox")
