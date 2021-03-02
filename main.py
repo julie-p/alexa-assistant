@@ -12,13 +12,13 @@ microphone = sr.Microphone()
 engine = pyttsx3.init()
 engine.setProperty('volume', 1.0)
 
-# Trigger word in Listen Function
+# Trigger word in Listen function
 WAKE = "Alexa"
 
 # Used to store user command for analysis
 CONVERSATION_LOG = "Conversation Log.txt"
 
-# Initial analysis of words to typically require a Google search
+# Initial analysis of words that typically require a Google search
 KEY_WORDS = {"who": "who", "what": "what", "when": "when", "where": "where", "why": "why", "how": "how"}
 
 class Alexa: 
@@ -50,7 +50,7 @@ class Alexa:
         engine.say(text)
         engine.runAndWait()
         
-    # Used to track the date of the conversation (maybe add time in the future)
+    # Used to track the date of the conversation (add time in the future + format date)
     def start_conversation_log(self):
         today = str(date.today())
         today = today
@@ -62,7 +62,7 @@ class Alexa:
         with open(CONVERSATION_LOG, "a") as f:
             f.write("User: " + command + "\n")
             
-    # Find the key words in the users's request
+    # Find the key words in the users request
     def find_key_words(self, command):
         if KEY_WORDS.get(command.split(' ')[0]) == command.split(' ')[0]:
             return True
@@ -74,7 +74,7 @@ class Alexa:
             if self.find_key_words(command):
                 a.speak("Here is what I found.")
                 webbrowser.open("http://www.google.com/search?q={}".format(command))
-            # Different open commands
+            # Different open commands (refactor with a switch case later)
             elif command == "open youtube":
                 a.speak("Opening Youtube.")
                 webbrowser.open("https://www.youtube.com/feed/subscriptions")
