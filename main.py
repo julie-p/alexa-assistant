@@ -15,7 +15,7 @@ engine.setProperty('volume', 1.0)
 # Trigger word in Listen function
 WAKE = "Alexa"
 
-# Used to store user command for analysis
+# Used to store user commands for analysis
 CONVERSATION_LOG = "Conversation Log.txt"
 
 # Initial analysis of words that typically require a Google search
