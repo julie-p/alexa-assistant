@@ -15,7 +15,7 @@ engine.setProperty('volume', 1.0)
 # Trigger word in Listen function
 WAKE = "Alexa"
 
-# Used to store user commands for analysis
+# Store user commands for analysis
 CONVERSATION_LOG = "Conversation Log.txt"
 
 # Initial analysis of words that typically require a Google search
@@ -27,7 +27,7 @@ class Alexa:
         self.recognizer = sr.Recognizer()
         self.microphone = sr.Microphone()
         
-    # Used to hear the commands after the trigger word has been said
+    # Hear the commands after the trigger word has been said
     def hear(self, recognizer, microphone, response):
         try: 
             with microphone as source:
@@ -45,12 +45,12 @@ class Alexa:
         except sr.RequestError:
             print("Network error.")
             
-    # Used to speak to the user
+    # Speak to the user
     def speak(self, text):
         engine.say(text)
         engine.runAndWait()
         
-    # Used to track the date of the conversation (add time in the future + format date)
+    # Track the date of the conversation (add time in the future + format date)
     def start_conversation_log(self):
         today = str(date.today())
         today = today
@@ -67,7 +67,7 @@ class Alexa:
         if KEY_WORDS.get(command.split(' ')[0]) == command.split(' ')[0]:
             return True
     
-    # Analyzes the command
+    # Analyze the command
     def analyze(self, command):
         try:
             # If the command starts with a key word => do a Google search
@@ -97,7 +97,7 @@ class Alexa:
         except TypeError:
             pass
         
-    # Used to listen to the key words
+    # Listen to the key words
     def listen(self, recognizer, microphone):
         while True:
             try:
